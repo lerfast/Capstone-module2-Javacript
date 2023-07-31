@@ -2,9 +2,11 @@
   "name": "capstone-module2-javacript",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "start": "webpack",
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
@@ -16,9 +18,15 @@
     "eslint-plugin-import": "^2.28.0",
     "hint": "^7.1.10",
     "jest": "^29.6.2",
+    "mini-css-extract-plugin": "^2.7.6",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",
     "stylelint-csstree-validator": "^1.9.0",
-    "stylelint-scss": "^3.21.0"
+    "stylelint-scss": "^3.21.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
