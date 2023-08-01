@@ -44,6 +44,10 @@ async function renderItems(items) {
     itemElement.appendChild(commentsButton);
     itemsContainer.appendChild(itemElement);
   });
+
+  // Update the item counter with the total number of items
+  const itemCounter = document.getElementById('item-counter');
+  itemCounter.innerText = items.length;
 }
 
 async function handleLikeButtonClick(itemId) {
