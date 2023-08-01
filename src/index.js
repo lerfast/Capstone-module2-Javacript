@@ -1,6 +1,6 @@
 import './style.css';
 import showComments from './modules/popup.js';
-// import likeButtonImage from './assets/heart.svg';
+import { getLikes, createLike } from './modules/involvementAPI.js';
 
 const apiUrl = 'https://api.tvmaze.com/shows';
 
@@ -14,11 +14,18 @@ async function fetchItems() {
   }
 }
 
-function renderItems(items) {
+async function renderItems(items) {
+  const appId = 'TsHUjYeYSyNZ9XlIQTrp'; // Replace with your actual app ID
+  const likesData = await getLikes(appId); // Fetch likes from the API
+
   const itemsContainer = document.getElementById('items-container');
   itemsContainer.innerHTML = '';
 
   items.forEach((item) => {
+    // Find the likes count for the current item
+    const itemLikes = likesData.find((likes) => likes.item_id === item.id);
+    const likesCount = itemLikes ? itemLikes.likes : 0;
+
     const itemElement = document.createElement('div');
     itemElement.className = 'item'; // Add a class name for styling
     itemElement.innerHTML = `<img class="card__img" src="${item.image.medium}">
@@ -26,7 +33,7 @@ function renderItems(items) {
       <p>${item.summary}</p>
       <div class="item-buttons">
         <button class="item-like-btn" data-item-id="${item.id}" aria-label="Like"></button>
-        <p>5 Likes</p>
+        <p class="like-counter">${likesCount} Likes</p>
       </div>
     `;
 
@@ -39,16 +46,28 @@ function renderItems(items) {
   });
 }
 
-// function handleLikeButtonClick(event) {
-// const itemId = event.target.getAttribute('data-item-id');
-// Add your logic here to handle the like button click for the item with the given itemId
-// For example, you can add the item to a liked list or perform some other action.
-// }
+async function handleLikeButtonClick(itemId) {
+  const appId = 'TsHUjYeYSyNZ9XlIQTrp'; // Replace with your actual app ID
+  try {
+    const response = await createLike(appId, itemId);
+    if (response) {
+      // After successful API call, update the like counter by fetching likes again
+      const likesData = await getLikes(appId);
+      const itemLikes = likesData.find((likes) => likes.item_id === itemId);
+      const likesCount = itemLikes ? itemLikes.likes : 0;
+      const likeCounter = document.querySelector(`[data-item-id="${itemId}"] + .like-counter`);
+      likeCounter.innerText = `${likesCount} Likes`;
+    }
+  } catch (error) {
+    // console.error('Failed to create like:', error);
+  }
+}
 
-// document.addEventListener('click', (event) => {
-// if (event.target.matches('.item-like-btn')) {
-// handleLikeButtonClick(event);
-// }
-// });
+document.addEventListener('click', (event) => {
+  if (event.target.matches('.item-like-btn')) {
+    const itemId = event.target.getAttribute('data-item-id');
+    handleLikeButtonClick(itemId);
+  }
+});
 
 fetchItems().then((items) => renderItems(items));
