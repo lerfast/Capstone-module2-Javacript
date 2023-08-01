@@ -47,17 +47,11 @@ main {
 }
 
 .item button {
-  background-color: #007bff;
-  color: #fff;
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
-}
-
-.item button:hover {
-  background-color: #0056b3;
 }
 
 footer {
@@ -139,4 +133,35 @@ footer {
 .img__x {
   width: 17px;
   height: 17px;
+}
+
+/* Like Button Styles */
+
+.item-like-btn {
+  width: 24px;
+  height: 27px;
+  background-image: url('/src/assets/heart.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin-top: 10px;
+  background-color: transparent;
+}
+
+.item-like-btn:focus,
+.item-like-btn:hover {
+  background-color: transparent;
+  outline: none; /* This will remove the focus outline */
+}
+
+.item-like-btn:focus,
+.item-like-btn:hover,
+.item-like-btn:active,
+.item-like-btn:visited {
+  border: none;
+}
+
+.item-buttons {
+  display: flex;
+  flex-direction: column;
 }
