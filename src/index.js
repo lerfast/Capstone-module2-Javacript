@@ -3,6 +3,7 @@ import showComments from './modules/popup.js';
 import { getLikes, createLike } from './modules/involvementAPI.js';
 
 const apiUrl = 'https://api.tvmaze.com/shows';
+const appId = 'TsHUjYeYSyNZ9XlIQTrp'; // Replace with your actual app ID
 
 async function fetchItems() {
   try {
@@ -14,10 +15,7 @@ async function fetchItems() {
   }
 }
 
-async function renderItems(items) {
-  const appId = 'TsHUjYeYSyNZ9XlIQTrp'; // Replace with your actual app ID
-  const likesData = await getLikes(appId); // Fetch likes from the API
-
+async function renderItems(items, likesData) {
   const itemsContainer = document.getElementById('items-container');
   itemsContainer.innerHTML = '';
 
@@ -33,7 +31,7 @@ async function renderItems(items) {
       <p>${item.summary}</p>
       <div class="item-buttons">
         <button class="item-like-btn" data-item-id="${item.id}" aria-label="Like"></button>
-        <p class="like-counter">${likesCount} Likes</p>
+        <p class="like-counter" data-like-count="${likesCount}">${likesCount} Likes</p>
       </div>
     `;
 
@@ -44,26 +42,21 @@ async function renderItems(items) {
     itemElement.appendChild(commentsButton);
     itemsContainer.appendChild(itemElement);
   });
-
-  // Update the item counter with the total number of items
-  const itemCounter = document.getElementById('item-counter');
-  itemCounter.innerText = items.length;
 }
 
 async function handleLikeButtonClick(itemId) {
-  const appId = 'TsHUjYeYSyNZ9XlIQTrp'; // Replace with your actual app ID
   try {
-    const response = await createLike(appId, itemId);
-    if (response) {
-      // After successful API call, update the like counter by fetching likes again
-      const likesData = await getLikes(appId);
-      const itemLikes = likesData.find((likes) => likes.item_id === itemId);
-      const likesCount = itemLikes ? itemLikes.likes : 0;
+    const likesCount = await createLike(appId, itemId);
+    if (likesCount !== null) {
       const likeCounter = document.querySelector(`[data-item-id="${itemId}"] + .like-counter`);
       likeCounter.innerText = `${likesCount} Likes`;
+
+      // Store the updated like count in local storage
+      likeCounter.setAttribute('data-like-count', likesCount);
+      localStorage.setItem(`likes_${itemId}`, likesCount);
     }
   } catch (error) {
-    // console.error('Failed to create like:', error);
+    console.error('Failed to create like:', error);
   }
 }
 
@@ -74,4 +67,26 @@ document.addEventListener('click', (event) => {
   }
 });
 
-fetchItems().then((items) => renderItems(items));
+async function init() {
+  const items = await fetchItems();
+  const likesData = await getLikes(appId);
+
+  renderItems(items, likesData);
+
+  items.forEach((item) => {
+    const itemId = item.id;
+    const likeCounter = document.querySelector(`[data-item-id="${itemId}"] + .like-counter`);
+    const storedLikesCount = localStorage.getItem(`likes_${itemId}`);
+    
+    if (likeCounter && storedLikesCount !== null) {
+      likeCounter.innerText = `${storedLikesCount} Likes`;
+      likeCounter.setAttribute('data-like-count', storedLikesCount);
+    } else if (likeCounter) {
+      // If the like count is not found in local storage, set a default value
+      likeCounter.innerText = `0 Likes`;
+      likeCounter.setAttribute('data-like-count', '0');
+    }
+  });
+}
+
+init();
