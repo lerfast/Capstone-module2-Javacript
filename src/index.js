@@ -1,4 +1,5 @@
 import './style.css';
+import showComments from './modules/popup.js';
 
 const apiUrl = 'https://api.tvmaze.com/shows';
 
@@ -12,11 +13,6 @@ async function fetchItems() {
   }
 }
 
-function showComments() {
-  // You can implement the logic to fetch and display comments here
-  // For demonstration purposes, the 'item' parameter has been removed
-}
-
 function renderItems(items) {
   const itemsContainer = document.getElementById('items-container');
   itemsContainer.innerHTML = '';
@@ -28,7 +24,7 @@ function renderItems(items) {
 
     const commentsButton = document.createElement('button');
     commentsButton.innerText = 'Show Comments'; // Button text
-    commentsButton.addEventListener('click', showComments); // Use showComments directly as the event listener
+    commentsButton.addEventListener('click', () => showComments(item)); // Use showComments directly as the event listener
 
     itemElement.appendChild(commentsButton);
     itemsContainer.appendChild(itemElement);
