@@ -1,6 +1,7 @@
 import './style.css';
 import showComments from './modules/popup.js';
 import { getLikes, createLike } from './modules/involvementAPI.js';
+import countItems from './modules/itemCounter.js'; // Import the item counter function
 
 const apiUrl = 'https://api.tvmaze.com/shows';
 const appId = 'TsHUjYeYSyNZ9XlIQTrp'; // Replace with your actual app ID
@@ -56,7 +57,7 @@ async function handleLikeButtonClick(itemId) {
       localStorage.setItem(`likes_${itemId}`, likesCount);
     }
   } catch (error) {
-    console.error('Failed to create like:', error);
+    // console.error('Failed to create like:', error);
   }
 }
 
@@ -77,16 +78,21 @@ async function init() {
     const itemId = item.id;
     const likeCounter = document.querySelector(`[data-item-id="${itemId}"] + .like-counter`);
     const storedLikesCount = localStorage.getItem(`likes_${itemId}`);
-    
+
     if (likeCounter && storedLikesCount !== null) {
       likeCounter.innerText = `${storedLikesCount} Likes`;
       likeCounter.setAttribute('data-like-count', storedLikesCount);
     } else if (likeCounter) {
       // If the like count is not found in local storage, set a default value
-      likeCounter.innerText = `0 Likes`;
+      likeCounter.innerText = '0 Likes';
       likeCounter.setAttribute('data-like-count', '0');
     }
   });
+
+  // Count and display the total number of items on the homepage
+  const totalItemsCount = countItems();
+  const totalItemsCounter = document.getElementById('total-items-counter');
+  totalItemsCounter.innerText = `Total Items: ${totalItemsCount}`;
 }
 
 init();
