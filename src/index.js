@@ -26,7 +26,7 @@ function renderItems(items) {
       <p>${item.summary}</p>
       <div class="item-buttons">
         <button class="item-like-btn" data-item-id="${item.id}" aria-label="Like"></button>
-        
+        <p>5 Likes</p>
       </div>
     `;
 
