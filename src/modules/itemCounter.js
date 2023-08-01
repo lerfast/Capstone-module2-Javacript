@@ -5,4 +5,9 @@ function countItems() {
   return items.length;
 }
 
-export default countItems;
+function countComments() {
+  const comments = document.querySelectorAll('.comment');
+  return comments.length;
+}
+
+export { countItems, countComments };

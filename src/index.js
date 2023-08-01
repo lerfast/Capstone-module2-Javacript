@@ -1,7 +1,7 @@
 import './style.css';
 import showComments from './modules/popup.js';
 import { getLikes, createLike } from './modules/involvementAPI.js';
-import countItems from './modules/itemCounter.js'; // Import the item counter function
+import { countItems, countComments } from './modules/itemCounter.js'; // Import the item counter functions
 
 const apiUrl = 'https://api.tvmaze.com/shows';
 const appId = 'TsHUjYeYSyNZ9XlIQTrp'; // Replace with your actual app ID
@@ -93,6 +93,11 @@ async function init() {
   const totalItemsCount = countItems();
   const totalItemsCounter = document.getElementById('total-items-counter');
   totalItemsCounter.innerText = `Total Items: ${totalItemsCount}`;
+
+  // Count and display the total number of comments on the homepage
+  const totalCommentsCount = countComments();
+  const totalCommentsCounter = document.getElementById('total-comments-counter');
+  totalCommentsCounter.innerText = `Total Comments: ${totalCommentsCount}`;
 }
 
 init();
