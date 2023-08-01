@@ -2,6 +2,15 @@ import imgX from '../assets/delete.png';
 
 const containerPopup = document.querySelector('.popup__container');
 
+// Close Popup window with the button "X"
+const closePopup = () => {
+  const btnX = document.querySelector('.popup__btn_x');
+  btnX.addEventListener('click', () => {
+    containerPopup.innerHTML = '';
+  });
+};
+
+// Show popup window with corresponding information
 const showComments = (items) => {
   containerPopup.innerHTML = `
 <div class="popup__background">  
@@ -17,10 +26,7 @@ const showComments = (items) => {
   </div>
 </div>
 </div>`;
-  const btnX = document.querySelector('.popup__btn_x');
-  btnX.addEventListener('click', () => {
-    containerPopup.innerHTML = '';
-  });
+  closePopup();
 };
 
 export default showComments;
