@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -29,7 +29,6 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
-
     ],
   },
   optimization: {
