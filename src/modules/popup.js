@@ -3,7 +3,8 @@ import { postData, getData } from './post-get.js';
 
 const containerPopup = document.querySelector('.popup__container');
 
-// Submit comment to the Involvement API
+// Function to submit a new comment to the Involvement API
+
 const submitComment = (items) => {
   const username = document.getElementById('username__input');
   const comment = document.getElementById('comments__textarea');
@@ -11,7 +12,7 @@ const submitComment = (items) => {
   const btncomments = document.getElementById('btn-submit__comments');
   btncomments.addEventListener('click', async () => {
     if (username.value.trim() === '' || comment.value.trim() === '') {
-      return;
+      return; // Exit the function if any field is empty
     }
 
     await postData(items, username, comment);
@@ -21,7 +22,8 @@ const submitComment = (items) => {
   });
 };
 
-// Close Popup window with the button "X"
+// Function to close the popup window with the button "X"
+
 const closePopup = () => {
   const btnX = document.querySelector('.popup__btn_x');
   btnX.addEventListener('click', () => {

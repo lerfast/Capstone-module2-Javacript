@@ -1,3 +1,5 @@
+// Function to post a new comment to the API
+
 const postData = async (items, user, usercomment) => {
   const response = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/OsSQl2R6ei1KLnLLBTTT/comments', {
     method: 'POST',
@@ -14,6 +16,8 @@ const postData = async (items, user, usercomment) => {
   console.log(data);
 };
 
+// Function to render comments in the comments container
+
 const renderComments = (data) => {
   const commentsContainer = document.querySelector('.container__comments');
   commentsContainer.innerHTML = '';
@@ -21,6 +25,8 @@ const renderComments = (data) => {
     commentsContainer.innerHTML += `<p><strong>${data.username}:</strong> ${data.comment}</p>`;
   });
 };
+
+// Function to fetch comments data from the API and render them
 
 const getData = async (items) => {
   const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/OsSQl2R6ei1KLnLLBTTT/comments?item_id=${items.id}`);
