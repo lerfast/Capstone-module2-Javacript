@@ -165,3 +165,43 @@ footer {
   display: flex;
   flex-direction: column;
 }
+
+/* Comments */
+.popoup__comments {
+  width: 90%;
+  margin-top: 10px;
+}
+
+.popup__AddComment {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#username__input {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+#comments__texarea {
+  height: 100px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+#btn-submit__comments {
+  width: 50%;
+  min-width: 200px;
+  align-self: center;
+  padding: 10px;
+  border-radius: 6px;
+}
