@@ -21,9 +21,11 @@ const postData = async (items, user, usercomment) => {
 const renderComments = (data) => {
   const commentsContainer = document.querySelector('.container__comments');
   commentsContainer.innerHTML = '';
-  data.forEach((data) => {
-    commentsContainer.innerHTML += `<p class="comment"><strong>${data.username}:</strong> ${data.comment}</p>`;
-  });
+  if (Array.isArray(data)) {
+    data.forEach((data) => {
+      commentsContainer.innerHTML += `<p class="comment"><strong>${data.username}:</strong> ${data.comment}</p>`;
+    });
+  }
 };
 
 // Function to fetch comments data from the API and render them

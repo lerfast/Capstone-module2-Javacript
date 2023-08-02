@@ -70,6 +70,6 @@ const showComments = (items) => {
     commentsHeader.textContent = `Comentarios(${result})`;
   });
 
-  observer.observe(container, { childList: true });
+  observer.observe(container, { childList: true, subtree: true });
 };
 export default showComments;
