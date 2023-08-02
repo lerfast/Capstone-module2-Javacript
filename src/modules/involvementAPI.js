@@ -33,10 +33,13 @@ async function createLike(appId, itemId) {
       throw new Error('Failed to create like.');
     }
 
-    return true;
+    // Fetch the updated likes count from the server and return it
+    const updatedLikesData = await getLikes(appId);
+    const updatedItemLikes = updatedLikesData.find((likes) => likes.item_id === itemId);
+    return updatedItemLikes ? updatedItemLikes.likes : 0;
   } catch (error) {
     // console.error('Failed to create like:', error);
-    return false;
+    return null;
   }
 }
 
