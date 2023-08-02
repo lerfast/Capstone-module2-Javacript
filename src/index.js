@@ -100,4 +100,43 @@ async function init() {
   totalCommentsCounter.innerText = `Total Comments: ${totalCommentsCount}`;
 }
 
+document.addEventListener('DOMContentLoaded', async () => {
+  const items = await fetchItems();
+  const likesData = await getLikes(appId);
+
+  renderItems(items, likesData);
+
+  items.forEach((item) => {
+    const itemId = item.id;
+    const likeCounter = document.querySelector(`[data-item-id="${itemId}"] + .like-counter`);
+    const storedLikesCount = localStorage.getItem(`likes_${itemId}`);
+
+    if (likeCounter && storedLikesCount !== null) {
+      likeCounter.innerText = `${storedLikesCount} Likes`;
+      likeCounter.setAttribute('data-like-count', storedLikesCount);
+    } else if (likeCounter) {
+      // If the like count is not found in local storage, set a default value
+      likeCounter.innerText = '0 Likes';
+      likeCounter.setAttribute('data-like-count', '0');
+    }
+  });
+
+  // Count and display the total number of items on the homepage
+  const totalItemsCount = countItems();
+  const totalItemsCounter = document.getElementById('total-items-counter');
+  totalItemsCounter.innerText = `Total Items: ${totalItemsCount}`;
+
+  // Count and display the total number of comments on the homepage
+  const totalCommentsCount = countComments();
+  const totalCommentsCounter = document.getElementById('total-comments-counter');
+  totalCommentsCounter.innerText = `Total Comments: ${totalCommentsCount}`;
+
+  // Handle like button click for each item
+  const likeButtons = document.querySelectorAll('.item-like-btn');
+  likeButtons.forEach((button) => {
+    const itemId = button.getAttribute('data-item-id');
+    handleLikeButtonClick(itemId);
+  });
+});
+
 init();
