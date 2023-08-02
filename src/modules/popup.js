@@ -1,5 +1,6 @@
 import imgX from '../assets/delete.png';
 import { postData, getData } from './post-get.js';
+import countComment from './counter_comments.js';
 
 const containerPopup = document.querySelector('.popup__container');
 
@@ -47,9 +48,8 @@ const showComments = (items) => {
       <p class="popup__runtime">Duration: ${items.runtime} min</p>
     </div>
     <div class="popoup__comments">
+    <h2 class="comment-header"></h2>
     <div class="container__comments">
-    <h2>Comments(2)</h2>
-    <p class="comments">Test 1</p>
     </div>
     <h2 class="popup__AddComment">Add a Comment</h2>
     <div class="inputs-container">
@@ -62,6 +62,14 @@ const showComments = (items) => {
   </div>`;
   closePopup();
   submitComment(items);
-};
 
+  const container = document.querySelector('.container__comments');
+  const observer = new MutationObserver(() => {
+    const result = countComment();
+    const commentsHeader = document.querySelector('.comment-header');
+    commentsHeader.textContent = `Comentarios(${result})`;
+  });
+
+  observer.observe(container, { childList: true });
+};
 export default showComments;

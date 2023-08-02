@@ -22,7 +22,7 @@ const renderComments = (data) => {
   const commentsContainer = document.querySelector('.container__comments');
   commentsContainer.innerHTML = '';
   data.forEach((data) => {
-    commentsContainer.innerHTML += `<p><strong>${data.username}:</strong> ${data.comment}</p>`;
+    commentsContainer.innerHTML += `<p class="comment"><strong>${data.username}:</strong> ${data.comment}</p>`;
   });
 };
 
