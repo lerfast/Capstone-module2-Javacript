@@ -44,6 +44,8 @@ const showComments = (items) => {
   <img class="popup__img" src="${items.image.original}">
   </div>
     <div class="popup__details">
+      <p class="popup__genres"><strong>Category:</strong> ${items.summary}</p>
+      <br>
       <p class="popup__genres"><strong>Category:</strong> ${items.genres}</p>
       <p class="popup__runtime"><strong>Duration:</strong> ${items.runtime} min</p>
       <p class="popup__runtime"><strong>Language:</strong> ${items.language}</p>
