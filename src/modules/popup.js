@@ -46,6 +46,7 @@ const showComments = (items) => {
     <div class="popup__details">
       <p class="popup__genres"><strong>Category:</strong> ${items.genres}</p>
       <p class="popup__runtime"><strong>Duration:</strong> ${items.runtime} min</p>
+      <p class="popup__runtime"><strong>Language:</strong> ${items.language}</p>
     </div>
     <div class="popoup__comments">
     <h2 class="comment-header"></h2>

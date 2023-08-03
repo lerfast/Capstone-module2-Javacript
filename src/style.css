@@ -12,7 +12,7 @@ body {
 }
 
 header {
-  background-color: #007bff;
+  background: linear-gradient(to right, #125eb0, rgb(8 60 117 / 80%));
   color: #fff;
   padding: 10px;
   text-align: center;
@@ -29,6 +29,8 @@ main {
 }
 
 .item {
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   border: 1px solid #ccc;
   padding: 10px;
@@ -38,7 +40,8 @@ main {
 
 .item h2 {
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .item p {
@@ -55,10 +58,10 @@ main {
 }
 
 footer {
-  background-color: #007bff;
+  background: linear-gradient(to right, #125eb0, rgb(8 60 117 / 80%));
   color: #fff;
   text-align: center;
-  padding: 10px;
+  padding: 20px;
 }
 
 /* Popup Styles */
@@ -238,4 +241,17 @@ footer {
   color: #d7d7d7;
   text-align: center;
   margin-bottom: 13px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.utilities {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+  align-items: center;
+  margin-right: 20px;
 }
