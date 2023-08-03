@@ -1,4 +1,4 @@
-# Capstone-module2-Javacript
+# MazTV
 
 <a name="readme-top"></a>
 
