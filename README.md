@@ -111,7 +111,7 @@ To run tests, run the following command:
 ## 🚀 Live Demo <a name="live-demo"></a>
 
 
-- You can visit the live demo [here]()
+- Comming soon
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
