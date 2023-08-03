@@ -111,7 +111,7 @@ To run tests, run the following command:
 ## 🚀 Live Demo <a name="live-demo"></a>
 
 
-- Comming soon
+- https://lerfast.github.io/Capstone-module2-Javacript/dist/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -121,9 +121,9 @@ To run tests, run the following command:
 
 👤 **Luis Emilio Rojas**
 
-- GitHub: [@githubhandle](https://github.com/lerfast)
-- Twitter: [@twitterhandle](https://twitter.com/lerfast)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/luis-emilio-rojas-rojas-6ba90a8a/)
+- GitHub: [@lerfast](https://github.com/lerfast)
+- Twitter: [@Luis Emilio Rojas](https://twitter.com/lerfast)
+- LinkedIn: [Luis Emilio Rojas](https://www.linkedin.com/in/luis-emilio-rojas-rojas-6ba90a8a/)
   
 👤 **Javier Aybar**
 
