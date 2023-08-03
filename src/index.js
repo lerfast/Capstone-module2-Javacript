@@ -1,7 +1,7 @@
 import './style.css';
 import showComments from './modules/popup.js';
 import { getLikes, createLike } from './modules/involvementAPI.js';
-import { countItems, countComments } from './modules/itemCounter.js'; // Import the item counter functions
+import { countItems } from './modules/itemCounter.js'; // Import the item counter functions
 
 const apiUrl = 'https://api.tvmaze.com/shows';
 const appId = 'TsHUjYeYSyNZ9XlIQTrp'; // Replace with your actual app ID
@@ -20,7 +20,9 @@ async function renderItems(items, likesData) {
   const itemsContainer = document.getElementById('items-container');
   itemsContainer.innerHTML = '';
 
-  items.forEach((item) => {
+  const itemsToShow = items.slice(0, 48);
+
+  itemsToShow.forEach((item) => {
     // Find the likes count for the current item
     const itemLikes = likesData.find((likes) => likes.item_id === item.id);
     const likesCount = itemLikes ? itemLikes.likes : 0;
@@ -28,8 +30,7 @@ async function renderItems(items, likesData) {
     const itemElement = document.createElement('div');
     itemElement.className = 'item'; // Add a class name for styling
     itemElement.innerHTML = `<img class="card__img" src="${item.image.medium}">
-      <h2>${item.name}</h2>
-      <p>${item.summary}</p>
+      <h2 class="title-series">${item.name}</h2>
       <div class="item-buttons">
         <button class="item-like-btn" data-item-id="${item.id}" aria-label="Like"></button>
         <p class="like-counter" data-like-count="${likesCount}">${likesCount} Likes</p>
@@ -92,12 +93,7 @@ async function init() {
   // Count and display the total number of items on the homepage
   const totalItemsCount = countItems();
   const totalItemsCounter = document.getElementById('total-items-counter');
-  totalItemsCounter.innerText = `Total Items: ${totalItemsCount}`;
-
-  // Count and display the total number of comments on the homepage
-  const totalCommentsCount = countComments();
-  const totalCommentsCounter = document.getElementById('total-comments-counter');
-  totalCommentsCounter.innerText = `Total Comments: ${totalCommentsCount}`;
+  totalItemsCounter.innerText = `Total Series: ${totalItemsCount}`;
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -124,12 +120,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Count and display the total number of items on the homepage
   const totalItemsCount = countItems();
   const totalItemsCounter = document.getElementById('total-items-counter');
-  totalItemsCounter.innerText = `Total Items: ${totalItemsCount}`;
-
-  // Count and display the total number of comments on the homepage
-  const totalCommentsCount = countComments();
-  const totalCommentsCounter = document.getElementById('total-comments-counter');
-  totalCommentsCounter.innerText = `Total Comments: ${totalCommentsCount}`;
+  totalItemsCounter.innerText = `Total Series: ${totalItemsCount}`;
 
   // Handle like button click for each item
   const likeButtons = document.querySelectorAll('.item-like-btn');
