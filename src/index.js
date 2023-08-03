@@ -47,18 +47,13 @@ const renderItems = async (items, likesData) => {
 };
 
 const handleLikeButtonClick = async (itemId) => {
-  try {
-    const likesCount = await createLike(appId, itemId);
-    if (likesCount !== null) {
-      const likeCounter = document.querySelector(`[data-item-id="${itemId}"] + .like-counter`);
-      likeCounter.innerText = `${likesCount} Likes`;
-
-      // Store the updated like count in local storage
-      likeCounter.setAttribute('data-like-count', likesCount);
-      localStorage.setItem(`likes_${itemId}`, likesCount);
-    }
-  } catch (error) {
-    // console.error('Failed to create like:', error);
+  const likesCount = await createLike(appId, itemId);
+  if (likesCount !== null) {
+    const likeCounter = document.querySelector(`[data-item-id="${itemId}"] + .like-counter`);
+    likeCounter.innerText = `${likesCount} Likes`;
+    // Store the updated like count in local storage
+    likeCounter.setAttribute('data-like-count', likesCount);
+    localStorage.setItem(`likes_${itemId}`, likesCount);
   }
 };
 
