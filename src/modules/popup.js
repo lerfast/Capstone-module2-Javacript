@@ -1,4 +1,4 @@
-import imgX from '../assets/delete.png';
+import imgX from '../assets/delete.svg';
 import { postData, getData } from './post-get.js';
 import countComment from './counter_comments.js';
 
@@ -39,13 +39,13 @@ const showComments = (items) => {
   <div class="popup__background">  
   <div class="popup__body">
     <button class="popup__btn_x"><img class="img__x" src="${imgX}"></button>
+    <h2 class="popup__title">${items.name}</h2>
   <div class="popup__img-container">
   <img class="popup__img" src="${items.image.original}">
   </div>
     <div class="popup__details">
-      <h2 class="popup__title">${items.name}</h2>
-      <p class="popup__genres">Category: ${items.genres}</p>
-      <p class="popup__runtime">Duration: ${items.runtime} min</p>
+      <p class="popup__genres"><strong>Category:</strong> ${items.genres}</p>
+      <p class="popup__runtime"><strong>Duration:</strong> ${items.runtime} min</p>
     </div>
     <div class="popoup__comments">
     <h2 class="comment-header"></h2>
@@ -54,7 +54,7 @@ const showComments = (items) => {
     <h2 class="popup__AddComment">Add a Comment</h2>
     <div class="inputs-container">
     <input  id="username__input" type="text" placeholder="Your Name">
-    <textarea name="" id="comments__textarea" placeholder="Your insights"></textarea>
+    <input id="comments__textarea" placeholder="Your insights">
     <button id="btn-submit__comments" type="submit">Submit your comment</button>
     </div>
     </div>
@@ -67,7 +67,7 @@ const showComments = (items) => {
   const observer = new MutationObserver(() => {
     const result = countComment();
     const commentsHeader = document.querySelector('.comment-header');
-    commentsHeader.textContent = `Comentarios(${result})`;
+    commentsHeader.textContent = `Comments(${result})`;
   });
 
   observer.observe(container, { childList: true, subtree: true });
