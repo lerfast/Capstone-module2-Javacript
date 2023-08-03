@@ -13,7 +13,7 @@ const postData = async (items, user, usercomment) => {
     },
   });
   const data = await response.text();
-  console.log(data);
+  return data;
 };
 
 // Function to render comments in the comments container

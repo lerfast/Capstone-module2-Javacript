@@ -6,7 +6,7 @@ import { countItems } from './modules/itemCounter.js'; // Import the item counte
 const apiUrl = 'https://api.tvmaze.com/shows';
 const appId = 'TsHUjYeYSyNZ9XlIQTrp'; // Replace with your actual app ID
 
-async function fetchItems() {
+const fetchItems = async () => {
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
@@ -14,9 +14,9 @@ async function fetchItems() {
   } catch (error) {
     return []; // Return an empty array or appropriate default value in case of an error
   }
-}
+};
 
-async function renderItems(items, likesData) {
+const renderItems = async (items, likesData) => {
   const itemsContainer = document.getElementById('items-container');
   itemsContainer.innerHTML = '';
 
@@ -44,9 +44,9 @@ async function renderItems(items, likesData) {
     itemElement.appendChild(commentsButton);
     itemsContainer.appendChild(itemElement);
   });
-}
+};
 
-async function handleLikeButtonClick(itemId) {
+const handleLikeButtonClick = async (itemId) => {
   try {
     const likesCount = await createLike(appId, itemId);
     if (likesCount !== null) {
@@ -60,7 +60,7 @@ async function handleLikeButtonClick(itemId) {
   } catch (error) {
     // console.error('Failed to create like:', error);
   }
-}
+};
 
 document.addEventListener('click', (event) => {
   if (event.target.matches('.item-like-btn')) {
@@ -69,7 +69,7 @@ document.addEventListener('click', (event) => {
   }
 });
 
-async function init() {
+const init = async () => {
   const items = await fetchItems();
   const likesData = await getLikes(appId);
 
@@ -94,7 +94,7 @@ async function init() {
   const totalItemsCount = countItems();
   const totalItemsCounter = document.getElementById('total-items-counter');
   totalItemsCounter.innerText = `Total Series: ${totalItemsCount}`;
-}
+};
 
 document.addEventListener('DOMContentLoaded', async () => {
   const items = await fetchItems();

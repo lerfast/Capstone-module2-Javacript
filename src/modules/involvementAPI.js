@@ -1,4 +1,4 @@
-async function getLikes(appId) {
+const getLikes = async (appId) => {
   const url = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${appId}/likes`;
 
   try {
@@ -12,9 +12,9 @@ async function getLikes(appId) {
     // console.error('Failed to get likes:', error);
     return [];
   }
-}
+};
 
-async function createLike(appId, itemId) {
+const createLike = async (appId, itemId) => {
   const url = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${appId}/likes`;
   const body = {
     item_id: itemId,
@@ -41,6 +41,6 @@ async function createLike(appId, itemId) {
     // console.error('Failed to create like:', error);
     return null;
   }
-}
+};
 
 export { getLikes, createLike };
